@@ -3,9 +3,9 @@
 var app = angular.module('sataNoticer', []);
 
 app.run(['$templateCache', function($templateCache){
-	$templateCache.put('sata/nofier/themes/tranclude.html', '<div><div sata-notice ng-transclude ng-repeat="notice in notices"></div></div>');
-	$templateCache.put('sata/nofier/themes/default.html', '<div><div sata-notice ng-repeat="notice in notices" ng-class="notice.type && \'notice-\' + notice.type"><button ng-show="notice.closeable" type="button" class="notice-close" ng-click="notice.remove()">&times;</button><div class="notice-text">{{notice.text}}</div></div></div>');
-	$templateCache.put('sata/nofier/themes/bootstrap.html', '<div><div sata-notice ng-repeat="notice in notices" class="alert" ng-class="notice.type && \'alert-\' + notice.type"><button ng-show="notice.closeable" type="button" class="close" ng-click="notice.remove()">&times;</button>{{notice.text}}</div></div>');
+	$templateCache.put('sata/noticer/themes/tranclude.html', '<div><div sata-notice ng-transclude ng-repeat="notice in notices"></div></div>');
+	$templateCache.put('sata/noticer/themes/default.html', '<div><div sata-notice ng-repeat="notice in notices" ng-class="notice.type && \'notice-\' + notice.type"><button ng-show="notice.closeable" type="button" class="notice-close" ng-click="notice.remove()">&times;</button><div class="notice-text">{{notice.text}}</div></div></div>');
+	$templateCache.put('sata/noticer/themes/bootstrap.html', '<div><div sata-notice ng-repeat="notice in notices" class="alert" ng-class="notice.type && \'alert-\' + notice.type"><button ng-show="notice.closeable" type="button" class="close" ng-click="notice.remove()">&times;</button>{{notice.text}}</div></div>');
 }]);
 
 app.provider('SataNoticer', function () {
@@ -41,7 +41,7 @@ app.directive('sataNoticer', function () {
 		transclude: true,
 		templateUrl: function (tElement, tAttrs) {
 			if (!angular.isDefined(tAttrs.theme)) {
-				tAttrs.theme = 'sata/nofier/themes/tranclude.html';
+				tAttrs.theme = 'sata/noticer/themes/tranclude.html';
 			}
 			return tAttrs.theme;
 		},

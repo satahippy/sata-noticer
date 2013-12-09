@@ -9,6 +9,13 @@
 		<script src="assets/other/angular/angular.js"></script>
 		<script src="assets/js/noticer.js"></script>
 		<script src="assets/js/app.js"></script>
+
+		<style>
+			.notices-list {
+				border: 2px solid #000000;
+				margin: 5px 0;
+			}
+		</style>
 	</head>
 	<body class="container" ng-app="noticerDemoApp" ng-controller="DemoCtrl">
 		<form name="noticeForm" class="form-horizontal">
@@ -48,13 +55,21 @@
 		</p>
 		<div class="row">
 			<div class="col-md-4">
-				<sata-noticer theme="sata/nofier/themes/bootstrap.html"></sata-noticer>
+				<sata-noticer class="notices-list" theme="sata/noticer/themes/bootstrap.html"></sata-noticer>
 			</div>
 			<div class="col-md-4">
-				<sata-noticer theme="sata/nofier/themes/default.html"></sata-noticer>
+				<sata-noticer class="notices-list" theme="sata/noticer/themes/default.html"></sata-noticer>
 			</div>
 			<div class="col-md-4">
-				<sata-noticer><a href="" ng-show="notice.closeable" ng-click="notice.remove()">[x]</a>{{notice.text}} ({{notice.type}})</sata-noticer>
+				<sata-noticer class="notices-list"><a href="" ng-show="notice.closeable" ng-click="notice.remove()">[x]</a>{{notice.text}} ({{notice.type}})</sata-noticer>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<sata-noticer class="notices-list" theme="templates/custom-notice.html"></sata-noticer>
+			</div>
+			<div class="col-md-4">
+				<sata-noticer class="notices-list" theme="templates/custom-notice-directive.html"></sata-noticer>
 			</div>
 		</div>
 	</body>
