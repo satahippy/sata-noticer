@@ -13,7 +13,12 @@ app.controller('DemoCtrl', ['$scope', 'SataNoticer', function ($scope, SataNotic
 		$scope.text = '';
 	};
 
+	$scope.getCountNotices = function(){
+		return SataNoticer.notices.length;
+	}
+
 	$scope.type = 'info';
 	$scope.closeable = true;
+
 	return $scope.DemoCtrl = this;
 }]);

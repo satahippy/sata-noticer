@@ -9,12 +9,6 @@
 		<script src="assets/other/angular/angular.js"></script>
 		<script src="assets/js/noticer.js"></script>
 		<script src="assets/js/app.js"></script>
-
-		<style>
-			.notices {
-				margin-top: 20px;
-			}
-		</style>
 	</head>
 	<body class="container" ng-app="noticerDemoApp" ng-controller="DemoCtrl">
 		<form name="noticeForm" class="form-horizontal">
@@ -49,9 +43,18 @@
 				</div>
 			</div>
 		</form>
-		<div class="row notices">
-			<div class="col-md-12">
+		<p>
+			Notices: <b>{{getCountNotices()}}</b>
+		</p>
+		<div class="row">
+			<div class="col-md-4">
 				<sata-noticer theme="sata/nofier/themes/bootstrap.html"></sata-noticer>
+			</div>
+			<div class="col-md-4">
+				<sata-noticer theme="sata/nofier/themes/default.html"></sata-noticer>
+			</div>
+			<div class="col-md-4">
+				<sata-noticer><a href="" ng-show="notice.closeable" ng-click="notice.remove()">[x]</a>{{notice.text}} ({{notice.type}})</sata-noticer>
 			</div>
 		</div>
 	</body>
