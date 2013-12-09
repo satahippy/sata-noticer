@@ -3,26 +3,17 @@
 var app = angular.module('noticerDemoApp', ['sataNoticer']);
 
 app.controller('DemoCtrl', ['$scope', 'SataNoticer', function ($scope, SataNoticer) {
-	this.lastNotice = null;
-
-	this.sendNotice = function (text, autoclose) {
-		autoclose = angular.isDefined(autoclose) ? autoclose : false;
-		this.lastNotice = SataNoticer.add({text: text, autoclose: autoclose});
+	this.sendNotice = function () {
+		SataNoticer.add({
+			text: $scope.text,
+			type: $scope.type,
+			closeable: $scope.closeable,
+			autoclose: $scope.autoclose || false
+		});
+		$scope.text = '';
 	};
 
-	this.replaceLastNotice = function (text) {
-		if (this.lastNotice !== null) {
-			SataNoticer.remove(this.lastNotice);
-			this.lastNotice = SataNoticer.add(text);
-		}
-	};
-
-	this.removeLastNotice = function (text) {
-		if (this.lastNotice !== null) {
-			SataNoticer.remove(this.lastNotice);
-			this.lastNotice = null;
-		}
-	};
-
+	$scope.type = 'info';
+	$scope.closeable = true;
 	return $scope.DemoCtrl = this;
 }]);

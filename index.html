@@ -9,13 +9,50 @@
 		<script src="assets/other/angular/angular.js"></script>
 		<script src="assets/js/noticer.js"></script>
 		<script src="assets/js/app.js"></script>
+
+		<style>
+			.notices {
+				margin-top: 20px;
+			}
+		</style>
 	</head>
-	<body ng-app="noticerDemoApp" ng-controller="DemoCtrl">
-		<input type="text" ng-model="text" class="form-control" placeholder="Notice Text">
-		<button type="button" class="form-control btn btn-primary" ng-click="DemoCtrl.sendNotice(text)">Send</button>
-		<button type="button" class="form-control btn btn-primary" ng-click="DemoCtrl.sendNotice(text, 1000)">Autocolse</button>
-		<button type="button" class="form-control btn btn-warning" ng-click="DemoCtrl.replaceLastNotice(text)">Replace Last</button>
-		<button type="button" class="form-control btn btn-danger" ng-click="DemoCtrl.removeLastNotice(text)">Remove Last</button>
-		<sata-noticer there="is my attr"><a href="" ng-click="notice.remove()">[x]</a>{{notice.text}}</sata-noticer>
+	<body class="container" ng-app="noticerDemoApp" ng-controller="DemoCtrl">
+		<form name="noticeForm" class="form-horizontal">
+			<div class="form-group">
+				<div class="col-md-12">
+					<input type="text" ng-model="text" class="form-control" placeholder="Notice Text">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="col-md-12">
+							<input type="number" ng-model="autoclose" class="form-control" placeholder="Autoclose">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-12">
+							<select class="form-control" ng-model="type">
+								<option value="info">info</option>
+								<option value="success">success</option>
+								<option value="warning">warning</option>
+								<option value="danger">danger</option>
+							</select>
+						</div>
+					</div>
+					<div class="checkbox">
+						<label> <input type="checkbox" ng-model="closeable"> Closable </label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<button type="button" class="form-control btn btn-primary" ng-click="DemoCtrl.sendNotice()">Send</button>
+				</div>
+			</div>
+		</form>
+		<div class="row notices">
+			<div class="col-md-12">
+				<sata-noticer theme="sata/nofier/themes/bootstrap.html"></sata-noticer>
+			</div>
+		</div>
 	</body>
 </html>

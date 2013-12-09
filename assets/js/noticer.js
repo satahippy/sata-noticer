@@ -2,6 +2,12 @@
 
 var app = angular.module('sataNoticer', []);
 
+app.run(['$templateCache', function($templateCache){
+	$templateCache.put('sata/nofier/themes/tranclude.html', '<div><div sata-notice ng-transclude ng-repeat="notice in notices"></div></div>');
+	$templateCache.put('sata/nofier/themes/default.html', '<div><div sata-notice ng-repeat="notice in notices" ng-class="notice.type && \'notice-\' + notice.type"><button ng-show="notice.closeable" type="button" class="notice-close" ng-click="notice.remove()">&times;</button><div class="notice-text">{{notice.text}}</div></div></div>');
+	$templateCache.put('sata/nofier/themes/bootstrap.html', '<div><div sata-notice ng-repeat="notice in notices" class="alert" ng-class="notice.type && \'alert-\' + notice.type"><button ng-show="notice.closeable" type="button" class="close" ng-click="notice.remove()">&times;</button>{{notice.text}}</div></div>');
+}]);
+
 app.provider('SataNoticer', function () {
 	this.setDefaults = function (defaults) {
 		SataNotice.prototype.defaults = defaults;
@@ -31,9 +37,14 @@ app.provider('SataNoticer', function () {
 app.directive('sataNoticer', function () {
 	return {
 		restrict: 'E',
-		transclude: true,
 		replace: true,
-		template: '<div><div sata-notice ng-transclude ng-repeat="notice in notices"></div></div>',
+		transclude: true,
+		templateUrl: function (tElement, tAttrs) {
+			if (!angular.isDefined(tAttrs.theme)) {
+				tAttrs.theme = 'sata/nofier/themes/tranclude.html';
+			}
+			return tAttrs.theme;
+		},
 		controller: ['$scope', 'SataNoticer', function ($scope, SataNoticer) {
 			$scope.notices = SataNoticer.notices;
 		}]
@@ -43,9 +54,8 @@ app.directive('sataNoticer', function () {
 app.directive('sataNotice', function () {
 	return {
 		controller: ['$scope', '$timeout', function ($scope, $timeout) {
-			console.log($scope.notice);
 			if ($scope.notice.autoclose !== false) {
-				$timeout(function(){
+				$timeout(function () {
 					$scope.notice.remove();
 				}, $scope.notice.autoclose);
 			}
@@ -61,7 +71,9 @@ var SataNotice = function (text) {
 };
 
 SataNotice.prototype.defaults = {
-	autoclose: false
+	type: 'info',
+	autoclose: false,
+	closeable: true
 };
 
 SataNotice.prototype.noticer = null;
