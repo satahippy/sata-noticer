@@ -13,8 +13,9 @@
 	<body ng-app="noticerDemoApp" ng-controller="DemoCtrl">
 		<input type="text" ng-model="text" class="form-control" placeholder="Notice Text">
 		<button type="button" class="form-control btn btn-primary" ng-click="DemoCtrl.sendNotice(text)">Send</button>
+		<button type="button" class="form-control btn btn-primary" ng-click="DemoCtrl.sendNotice(text, 1000)">Autocolse</button>
 		<button type="button" class="form-control btn btn-warning" ng-click="DemoCtrl.replaceLastNotice(text)">Replace Last</button>
 		<button type="button" class="form-control btn btn-danger" ng-click="DemoCtrl.removeLastNotice(text)">Remove Last</button>
-		<sata-noticer there="is my attr">{{notice.text}}</sata-noticer>
+		<sata-noticer there="is my attr"><a href="" ng-click="notice.remove()">[x]</a>{{notice.text}}</sata-noticer>
 	</body>
 </html>

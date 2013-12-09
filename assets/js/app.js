@@ -5,8 +5,9 @@ var app = angular.module('noticerDemoApp', ['sataNoticer']);
 app.controller('DemoCtrl', ['$scope', 'SataNoticer', function ($scope, SataNoticer) {
 	this.lastNotice = null;
 
-	this.sendNotice = function (text) {
-		this.lastNotice = SataNoticer.add(text);
+	this.sendNotice = function (text, autoclose) {
+		autoclose = angular.isDefined(autoclose) ? autoclose : false;
+		this.lastNotice = SataNoticer.add({text: text, autoclose: autoclose});
 	};
 
 	this.replaceLastNotice = function (text) {
